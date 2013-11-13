@@ -1,0 +1,370 @@
+<!--
+ file:   basics_html.Rhtml
+ author: Peter DeWitt, peter.dewitt@ucdenver.edu
+ 
+ For:    Example Rnw file for creating a data analysis report using R, knitr,
+ and html
+
+ Please read the introduction section in this file, or the resulting pdf, for
+ instructions on reproducing the data analysis report.  
+
+ change log:
+ 12 Nov 2013 - File created 
+-->
+
+<html>
+  <head>
+
+<!--begin.rcode "setup", include = FALSE
+# This chunk sets up the R environment needed for the analysis.  The option 
+# include=FALSE, nothing will be written into the output document, but the code 
+# is still evaluated.
+
+# load needed libraries
+library(survival)
+library(Hmisc)
+library(gdata)
+
+options(stringsAsFactors = FALSE)
+
+# statistical significance level.
+kalpha   <- 0.05
+
+# number of decimal digits to use when reporting numeric values.
+kdigits  <- 2
+kpdigits <- 4
+
+# wrapper functions for formating numeric outputs, frmt(), and for p-values,
+# frmtp().
+frmt <- function(x, digits = kdigits, ...) { 
+  formatC(x, digits = digits, format = "f", big.mark = ",", ...)
+}
+
+frmtp <- function(x, pdigits = kpdigits, show.equal.sign = FALSE)
+{
+  out <- vector("character", length(x))
+  out <- formatC(x, pdigits, format = "f")
+
+  idx <- (x < 0.1^pdigits)
+  out[idx] <- paste("&lt", formatC(0.1^pdigits, pdigits, format = "f"))
+
+  if (show.equal.sign) out[!idx] <- paste("=", out[!idx])
+
+  out[is.na(x)] <- ""
+  return(out)
+}
+end.rcode-->
+
+</head>
+
+<body>
+
+  <center> 
+    <H1> Example Data Analysis Report Reproducible Research Using knitr with html </H1> 
+  </center>
+
+  <h2> Introduction </h2>
+
+  <p>
+This document serves as an example data analysis report generated using R for
+the analysis, html for the markup report writing language, and knitr to bring
+everything together.   The data set used is a fictitious as was generated for
+example purposes only.  The purpose of this document is to provide an example of
+reproducible research.  html is not the best markup language for a data analysis 
+report, but it could be useful for other applications.
+</p>
+
+<p> <strong> Reproducing this report </strong>  These are the steps required for
+reproducing this report.
+
+<ol>
+  <li> Install R on your computer. </li>
+
+  <li>Open R, install the knitr package if the package is not on your system.
+<!--begin.rcode "knitr_install", eval = FALSE, echo = TRUE
+install.packages("knitr", repos = "http://cran.rstudio.com")
+end.rcode-->
+</li>
+
+<li>Set the working directory in R to the same directory as this file exists
+    in.  Run the following commands in R, 
+<!--begin.rcode "knit_report", eval = FALSE, echo = TRUE
+library(knitr)
+knit(input = "basics_html.Rhtml")
+end.rcode-->
+</li>
+
+<li>The above R code will generate the file basics_html.html.  View the page
+in your favorite web browser</li>
+  
+</ol> 
+
+
+<H2> Analysis Methods </H2>
+
+<p>
+Overall survival analysis was done using both
+Kaplan-Meier estimates and Cox proportional hazard regression models.  
+The analysis was done in <!--rinline R.version.string --> and the
+survival analysis was done using the survival package.
+Statistical significance was set at the <!-- kalpha --> level.
+</p>
+
+
+<H2> Analysis and Results </H2>
+
+<!--begin.rcode "data_load", include = FALSE
+# This chunk loads the data set and cleans the data as needed.
+
+# load the data from the .csv file in the working directory
+prostate <- read.csv(file = "prostate.csv", header = TRUE)
+
+# view the structure of the data.  Since the chunk option include = FALSE, no
+# output form this chunk will be placed in the output file.  
+str(prostate)
+
+# clean/reformat the data set.  Set categories for the age of patients
+# factor the era of treatment, PSA values, and Gleason score.  Factor, and
+# rename the T.Stage (note the capitalization of Stage)
+prostate <- within(prostate, 
+                   {
+                     Age <- cut(Age, 
+                                breaks = c(min(Age), 50, 70, max(Age)), 
+                                include.lowest = TRUE, 
+                                right = FALSE)
+                     Era <- factor(Era, 1:2, paste("Era", 1:2))
+                     PSA <- factor(PSA, 1:3, c("[0, 10) ng/ml", 
+                                               "[10, 20) ng/ml",
+                                               "[20, Inf) ng/ml"))
+                     Gleason <- factor(Gleason, 1:4, paste("GS", 7:10))
+                     T.Stage <- factor(T.stage, 1:3, 
+                                       paste("T Stage", c("1", "2", "3/4")))
+                     rm(T.stage)
+                   })
+
+# double check the structure of the data.frame prostate.
+str(prostate)
+summary(prostate)
+end.rcode-->
+
+<p>
+The data set consisted of <!--rinline frmt(nrow(prostate), digits = 0) -->
+records.  A summary of the data set is presented
+in the table below.
+</p>
+
+<!--begin.rcode "demographics_table", echo = FALSE, results = "asis"
+# This chunk will produce a 'table 1'.  The options echo = FALSE omits this code
+# from being displayed in the final output document.  results = 'asis' will
+# allow the html code generated at then end of this chunk to be interpreted as
+# html code and not R console output.
+
+# find the total counts of each level for each of the following variables in the
+# data set: Age, Era, PSA, and T.Stage.  Generate the proportion within each
+# variable for each level as well.
+tab0 <- lapply(c("Age", "Era", "PSA", "T.Stage"), 
+               function(x) {
+                 table(prostate[, x])
+               })
+tab0p <- lapply(tab0, prop.table)
+
+# find the number of observations for each level of the variables Age, Era, PSA,
+# and T.Stage, by Gleason Score.  Find the column percentages as well.
+tabs <- lapply(c("Age", "Era", "PSA", "T.Stage"), 
+               function(x) {
+                 table(prostate[, x], prostate[, "Gleason"])
+               })
+tabsp <- lapply(tabs, prop.table, margin = 2)
+
+# format the counts and percentages into character strings with set decimal
+# precision.
+tabs  <- frmt(do.call(rbind, tabs), digits = 0)
+tabsp <- frmt(do.call(rbind, tabsp) * 100)
+tab0  <- rbind(cbind(frmt(do.call(c, tab0), digits = 0), 
+                     frmt(do.call(c, tab0p)*100)))
+
+# using the interleave function from library(gdata), build the summary
+# table
+tab <- as.data.frame(cbind(tab0, t(interleave(t(tabs), t(tabsp)))))
+
+# find the number of events (deaths) for each level of Gleason Score
+fit    <- survfit(Surv(OS.Time, OS.Status) ~ Gleason, data = prostate)
+events <- summary(fit)$table[, "events"]
+events <- t(interleave(matrix(frmt(c(sum(as.numeric(events)), 
+                                     as.numeric(events)), 0)), 
+                       matrix(rep("", 5))))
+colnames(events) <- names(tab) 
+tab <- rbind(tab, events)
+rownames(tab)[nrow(tab)] <- "Observed Death"
+
+# find the number and percentage of the sample in each Gleason score to use in
+# the header of the summary table.
+n <- table(prostate$Gleason)
+p <- prop.table(n)
+clhd <- t(interleave(matrix(frmt(as.numeric(n), 0)), 
+                     matrix(frmt(as.numeric(p)*100))))
+clhd <- c(frmt(sum(n), 0), "", clhd)
+
+names(tab)[1:2] <- c("Overall", "")
+names(clhd) <- names(tab)
+tab <- rbind(rep(c("n", "%"), 5), clhd, tab)
+rownames(tab)[1:2] <- c(" ", "  ")
+          
+# The call to the html function (from the Hmisc package) creates the html code
+# for the table. As noted before, the results = "asis" will allow for the output
+# to be interpreted as html and not R console output (as would be the case with
+# the default option of results = "markup"
+html(tab, file = "", title = "")
+end.rcode-->
+
+
+<!--begin.rcode "km_plot", echo = FALSE, results = "hide"
+# Produce simple KM plots
+fit <- survfit(Surv(OS.Time, OS.Status) ~ Gleason, data = prostate)
+plot(fit, col = 1:4, conf.int = T, ylim = c(0.5, 1.0), 
+     xlab = "Time (in months)", ylab = "Survival")
+legend("bottomleft", col = 1:4, lty = 1, lwd = 2, legend = paste("GS", 7:10))
+end.rcode-->
+
+<p>
+We are primarily interested in the differences in survival between patients with
+different Gleason scores.  The figure below presents the Kaplan-Meier
+survival estimates by Gleason score.  As expected, the higher the Gleason score,
+the worse the survival.  It should also be noted that even after seven years of
+tracking patients the median survival time is not estimable.  The lowest
+survival estimate is <!--rinline frmt(min(fit$surv) * 100, 2) -->%.
+</p>
+
+<p>
+Both univariable and multivariable Cox proportional hazard regression models
+were fitted for overall survival by the age, era of treatment, T stage, PSA, and
+Gleason score of the patient.  Results for all the regression models are
+presented in table below.
+</p>
+
+<!--begin.rcode "coxph_regression", echo = FALSE, results = "asis"
+# predictors to use
+preds <- c("Age", "Era", "T.Stage", "PSA", "Gleason")
+
+# fit the multiple coxph regression model
+frml <- paste("Surv(OS.Time, OS.Status) ~", paste(preds, collapse = "+"))
+fit  <- coxph(as.formula(frml), data = prostate)
+
+# test the proportional hazards assumption
+test <- cox.zph(fit)
+# plot(test)
+
+# define the row groups and row names for the regression output table
+rgrp  <- names(fit$xlevels)
+nrgrp <- sapply(fit$xlevels, length)
+rwnm  <- do.call(c, fit$xlevels)
+
+# build a matrix out, to store and display the regression output
+out <- matrix("", ncol = 4, nrow = sum(nrgrp))
+rownames(out) <- paste0(rep(rgrp, times = nrgrp), rwnm)
+
+out[rownames(out) %in% names(coef(fit)), 1]    <- frmt(exp(coef(fit)))
+out[!(rownames(out) %in% names(coef(fit))), 1] <- "Reference"
+out[rownames(out) %in% names(coef(fit)), 2:3]  <- frmt(exp(confint(fit)))
+out[rownames(out) %in% names(coef(fit)), 4]    <- 
+  frmtp(pnorm(-abs(coef(fit) / sqrt(diag(vcov(fit))))) * 2)
+rownames(out) <- rwnm
+
+# The following lapply statement fits a univariable coxph regression model for
+# each of the predictors used in the multiple regression model.  
+temp <- lapply(preds, 
+       function(x) { 
+         fit <- coxph(as.formula(paste("Surv(OS.Time, OS.Status) ~", x)),
+                      data = prostate)
+         rgrp  <- names(fit$xlevels)
+         nrgrp <- sapply(fit$xlevels, length)
+         rwnm  <- do.call(c, fit$xlevels)
+         out   <- matrix("", ncol = 4, nrow = sum(nrgrp))
+         rownames(out) <- paste0(rep(rgrp, times = nrgrp), rwnm)
+         out[rownames(out) %in% names(coef(fit)), 1]    <- frmt(exp(coef(fit)))
+         out[!(rownames(out) %in% names(coef(fit))), 1] <- "Reference"
+         out[rownames(out) %in% names(coef(fit)), 2:3] <- frmt(exp(confint(fit)))
+         out[rownames(out) %in% names(coef(fit)), 4]   <- 
+           frmtp(pnorm(-abs(coef(fit) / sqrt(diag(vcov(fit))))) * 2)
+         rownames(out) <- rwnm
+         return(out)
+       })
+temp <- do.call(rbind, temp)
+coxph.results <- cbind(temp, out)
+colnames(coxph.results) <- c("Univar HR", "LCL", "UCL", "Pval", 
+                                 "Multivar HR", "LCL", "UCL", "Pval")
+ 
+html(coxph.results, file = "")
+end.rcode-->
+
+<!--begin.rcode "conf_interval_strings", include = FALSE
+# confidence interval stings
+coxph.uni.strings <- paste0(coxph.results[, 1], " (95\\% CI: ", 
+                            coxph.results[, 2], ",",
+                            coxph.results[, 3], ")")
+coxph.multi.strings <- paste0(coxph.results[, 5], " (95\\% CI: ", 
+                              coxph.results[, 6], ",",
+                              coxph.results[, 7], ")")
+names(coxph.uni.strings) <- names(coxph.multi.strings) <- rwnm
+end.rcode-->
+
+<p>
+The results of a univariable regression model indicated that 
+Patients treated in Era 2 had statistically better survival than patients
+treated in Era 1, 
+HR = <!--rinline coxph.uni.strings["Era 2"] -->, 
+and there was no
+appreciable difference in the hazard ratio found in the multivariable
+regression model, 
+HR = <!--rinline coxph.multi.strings["Era 2"] -->.  As expected, as
+patients increase in age, T Stage increase, PSA increase, and Gleason score
+increases, the hazard also increases.
+</p>
+
+<p>
+The hazard ratio between Gleason 8 and Gleason 7, from the multivariable Cox
+proportional hazard regression model, is 
+HR = <!--rinline coxph.multi.strings["GS 8"] -->.  
+Further analysis of the pairwise comparisons of the hazards between all
+four Gleason scores can be provided upon request.
+</p>
+
+
+<H2> Concluions </H2>
+<p>
+The conclusions section for a data analysis report would generally be used to
+summarize the results presented in the analysis and results section, list any
+limitations to the study, and generate some discussion topics.  Seeing how the
+purpose of this report was to show illustrate the use of knitr, the
+conclusions will focus on reproducible research.
+</p>
+
+<p>
+Using {\tt knitr} to write data analysis reports were the written report and the
+data analysis methods is a version of literate programming.  When written well,
+the report are robust to changes in the data set, but more importantly, every
+element of the report is commented directly or contextually.  
+</p>
+
+<p>
+In addition to using knitr, a very powerful tool for authoring reports,
+both as a sole author, or as a collaboration, is to use version control
+software.  I prefer git, but another
+viable option is subversion.  RStudio has built-in features to working with
+either.  Repository hosting on github.com or bitbucket.org are helpful, but on
+public servers (private repos are possible, but think about the physical
+location of the data storage).  The git server software can be purchased and set
+up behind institutional firewalls.  
+</p>
+
+
+
+
+<!--begin.rcode "session_info", echo = TRUE, results = "markup"
+# for reproducability, print out the session infor for the packages, and
+# versions of the packages, used to run the anlaysis and create this document.
+print(sessionInfo(), local = FALSE)
+end.rcode-->
+
+</body>
+</html>

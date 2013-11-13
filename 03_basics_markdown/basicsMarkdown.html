@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Example Data Analysis Report Reproducible Research Using knitr with markdown</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Example Data Analysis Report Reproducible Research Using knitr with markdown</h1>
+
+<h2>Introduction</h2>
+
+<p>This document serves as an example data analysis report generated using R for
+the analysis, markdown for the markup report writing language, and knitr to bring
+everything together.   The data set used is a fictitious as was generated for
+example purposes only.  The purpose of this document is to provide an example of
+reproducible research.</p>
+
+<p><strong>Disclaimer</strong> I&#39;m not an expert at markdown.  There <em>are</em> better ways to do
+this.  I prefer working in LaTeX and have not done much with Markdown.  In
+general, there does seem to be a growing community of markdown users.  Please
+feel free to fork the repo and improve upon this example.</p>
+
+<p><em>Reproducing this report</em>  These are the steps required for
+reproducing this report.</p>
+
+<ol>
+<li><p>Install R on your computer.</p></li>
+<li><p>Suggested installs: pandoc and/or a markdown viewer for your web browser</p></li>
+<li><p>Open R, install the knitr package if the package is not on your system.</p></li>
+</ol>
+
+<pre><code class="r">install.packages(&quot;knitr&quot;, repos = &quot;http://cran.rstudio.com&quot;)
+</code></pre>
+
+<ol>
+<li>Set the working directory in R to the same directory as this file exists in.
+Run the following commands in R, </li>
+</ol>
+
+<pre><code class="r">library(knitr)
+knit(input = &quot;basicsMarkdown.Rmd&quot;)
+</code></pre>
+
+<ol>
+<li>The above R code will generate the file basicsMarkdown.md.  Use pandoc <a>  <a href="http://johnmacfarlane.net/pandoc/">http://johnmacfarlane.net/pandoc/</a> </a> to
+convert the markdown into other file formats, inlcuding LaTeX, html, .docx,</li>
+</ol>
+
+<pre><code class="r">pandoc(input = &quot;basicsMarkdown.md&quot;, format = &quot;docx&quot;)  # transform the .md to .docx
+</code></pre>
+
+<h2>Analysis Methods</h2>
+
+<p>Overall survival analysis was done using both
+Kaplan-Meier estimates and Cox proportional hazard regression models.<br/>
+The analysis was done in R version 3.0.1 (2013-05-16) and the
+survival analysis was done using the survival package.
+Statistical significance was set at the 0.05 level.</p>
+
+<h2>Analysis and Results</h2>
+
+<p>The data set consisted of 19,039
+records.  A summary of the data set is presented
+in the table below.  Reported values are counts and percentages&hellip; (I need to
+learn more about markdown tables to make this pretty.)</p>
+
+<table><thead>
+<tr>
+<th align="left">id</th>
+<th align="left">overall</th>
+<th align="left">overall</th>
+<th align="left">GS 7</th>
+<th align="left">GS 7</th>
+<th align="left">GS 8</th>
+<th align="left">GS 8</th>
+<th align="left">GS 9</th>
+<th align="left">GS 9</th>
+<th align="left">GS 10</th>
+<th align="left">GS 10</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"></td>
+<td align="left">n</td>
+<td align="left">%</td>
+<td align="left">n</td>
+<td align="left">%</td>
+<td align="left">n</td>
+<td align="left">%</td>
+<td align="left">n</td>
+<td align="left">%</td>
+<td align="left">n</td>
+<td align="left">%</td>
+</tr>
+<tr>
+<td align="left">[40,50)</td>
+<td align="left">3,051</td>
+<td align="left">16.03</td>
+<td align="left">2,145</td>
+<td align="left">16.52</td>
+<td align="left">544</td>
+<td align="left">14.82</td>
+<td align="left">323</td>
+<td align="left">15.10</td>
+<td align="left">39</td>
+<td align="left">15.98</td>
+</tr>
+<tr>
+<td align="left">[50,70)</td>
+<td align="left">5,945</td>
+<td align="left">31.23</td>
+<td align="left">4,259</td>
+<td align="left">32.80</td>
+<td align="left">1,005</td>
+<td align="left">27.38</td>
+<td align="left">608</td>
+<td align="left">28.42</td>
+<td align="left">73</td>
+<td align="left">29.92</td>
+</tr>
+<tr>
+<td align="left">[70,85]</td>
+<td align="left">10,043</td>
+<td align="left">52.75</td>
+<td align="left">6,582</td>
+<td align="left">50.69</td>
+<td align="left">2,121</td>
+<td align="left">57.79</td>
+<td align="left">1,208</td>
+<td align="left">56.47</td>
+<td align="left">132</td>
+<td align="left">54.10</td>
+</tr>
+<tr>
+<td align="left">Era 1</td>
+<td align="left">8,615</td>
+<td align="left">45.25</td>
+<td align="left">5,869</td>
+<td align="left">45.19</td>
+<td align="left">1,659</td>
+<td align="left">45.20</td>
+<td align="left">970</td>
+<td align="left">45.35</td>
+<td align="left">117</td>
+<td align="left">47.95</td>
+</tr>
+<tr>
+<td align="left">Era 2</td>
+<td align="left">10,424</td>
+<td align="left">54.75</td>
+<td align="left">7,117</td>
+<td align="left">54.81</td>
+<td align="left">2,011</td>
+<td align="left">54.80</td>
+<td align="left">1,169</td>
+<td align="left">54.65</td>
+<td align="left">127</td>
+<td align="left">52.05</td>
+</tr>
+<tr>
+<td align="left">[0, 10) ng/ml</td>
+<td align="left">11,567</td>
+<td align="left">60.75</td>
+<td align="left">8,410</td>
+<td align="left">64.76</td>
+<td align="left">1,997</td>
+<td align="left">54.41</td>
+<td align="left">1,038</td>
+<td align="left">48.53</td>
+<td align="left">122</td>
+<td align="left">50.00</td>
+</tr>
+<tr>
+<td align="left">[10, 20) ng/ml</td>
+<td align="left">4,372</td>
+<td align="left">22.96</td>
+<td align="left">2,845</td>
+<td align="left">21.91</td>
+<td align="left">927</td>
+<td align="left">25.26</td>
+<td align="left">531</td>
+<td align="left">24.82</td>
+<td align="left">69</td>
+<td align="left">28.28</td>
+</tr>
+<tr>
+<td align="left">[20, Inf) ng/ml</td>
+<td align="left">3,100</td>
+<td align="left">16.28</td>
+<td align="left">1,731</td>
+<td align="left">13.33</td>
+<td align="left">746</td>
+<td align="left">20.33</td>
+<td align="left">570</td>
+<td align="left">26.65</td>
+<td align="left">53</td>
+<td align="left">21.72</td>
+</tr>
+<tr>
+<td align="left">T Stage 1</td>
+<td align="left">9,668</td>
+<td align="left">50.78</td>
+<td align="left">7,110</td>
+<td align="left">54.75</td>
+<td align="left">1,699</td>
+<td align="left">46.29</td>
+<td align="left">770</td>
+<td align="left">36.00</td>
+<td align="left">89</td>
+<td align="left">36.48</td>
+</tr>
+<tr>
+<td align="left">T Stage 2</td>
+<td align="left">8,189</td>
+<td align="left">43.01</td>
+<td align="left">5,360</td>
+<td align="left">41.28</td>
+<td align="left">1,657</td>
+<td align="left">45.15</td>
+<td align="left">1,065</td>
+<td align="left">49.79</td>
+<td align="left">107</td>
+<td align="left">43.85</td>
+</tr>
+<tr>
+<td align="left">T Stage &frac34;</td>
+<td align="left">1,182</td>
+<td align="left">6.21</td>
+<td align="left">516</td>
+<td align="left">3.97</td>
+<td align="left">314</td>
+<td align="left">8.56</td>
+<td align="left">304</td>
+<td align="left">14.21</td>
+<td align="left">48</td>
+<td align="left">19.67</td>
+</tr>
+<tr>
+<td align="left">Observed Deaths</td>
+<td align="left">2,755</td>
+<td align="left"></td>
+<td align="left">1,611</td>
+<td align="left"></td>
+<td align="left">598</td>
+<td align="left"></td>
+<td align="left">473</td>
+<td align="left"></td>
+<td align="left">73</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk km_plot"/> </p>
+
+<p>We are primarily interested in the differences in survival between patients with
+different Gleason scores.  The figure below presents the Kaplan-Meier
+survival estimates by Gleason score.  As expected, the higher the Gleason score,
+the worse the survival.  It should also be noted that even after seven years of
+tracking patients the median survival time is not estimable.  The lowest
+survival estimate is 63.43%.</p>
+
+<p>Both univariable and multivariable Cox proportional hazard regression models
+were fitted for overall survival by the age, era of treatment, T stage, PSA, and
+Gleason score of the patient.  Results for all the regression models are
+presented in the following output.</p>
+
+<p><em>Univariable Results</em> The following table are the univariable cox ph regression results.</p>
+
+<table><thead>
+<tr>
+<th align="left">id</th>
+<th align="left">HR</th>
+<th align="left">LCL</th>
+<th align="left">UCL</th>
+<th align="left">p-value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">[40,50)</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">[50,70)</td>
+<td align="left">0.95</td>
+<td align="left">0.84</td>
+<td align="left">1.09</td>
+<td align="left">0.4807</td>
+</tr>
+<tr>
+<td align="left">[70,85]</td>
+<td align="left">1.62</td>
+<td align="left">1.44</td>
+<td align="left">1.81</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">Era 1</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Era 2</td>
+<td align="left">0.83</td>
+<td align="left">0.76</td>
+<td align="left">0.90</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">T Stage 1</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">T Stage 2</td>
+<td align="left">1.19</td>
+<td align="left">1.10</td>
+<td align="left">1.29</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">T Stage &frac34;</td>
+<td align="left">1.54</td>
+<td align="left">1.34</td>
+<td align="left">1.77</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">[0, 10) ng/ml</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">[10, 20) ng/ml</td>
+<td align="left">1.45</td>
+<td align="left">1.32</td>
+<td align="left">1.58</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">[20, Inf) ng/ml</td>
+<td align="left">1.62</td>
+<td align="left">1.47</td>
+<td align="left">1.78</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 7</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">GS 8</td>
+<td align="left">1.34</td>
+<td align="left">1.22</td>
+<td align="left">1.47</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 9</td>
+<td align="left">1.92</td>
+<td align="left">1.73</td>
+<td align="left">2.12</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 10</td>
+<td align="left">2.74</td>
+<td align="left">2.17</td>
+<td align="left">3.46</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+</tbody></table>
+
+<p>As exapected, higher gleason scores are associated with higher hazards.  </p>
+
+<p><em>Multivariable Results</em>  A multivariable cox ph regression model was fitted and the results are presented below.</p>
+
+<table><thead>
+<tr>
+<th align="left">id</th>
+<th align="left">HR</th>
+<th align="left">LCL</th>
+<th align="left">UCL</th>
+<th align="left">p-value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">[40,50)</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">[50,70)</td>
+<td align="left">0.96</td>
+<td align="left">0.84</td>
+<td align="left">1.10</td>
+<td align="left">0.5550</td>
+</tr>
+<tr>
+<td align="left">[70,85]</td>
+<td align="left">1.61</td>
+<td align="left">1.43</td>
+<td align="left">1.80</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">Era 1</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Era 2</td>
+<td align="left">0.84</td>
+<td align="left">0.77</td>
+<td align="left">0.92</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">T Stage 1</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">T Stage 2</td>
+<td align="left">1.12</td>
+<td align="left">1.03</td>
+<td align="left">1.21</td>
+<td align="left">0.0063</td>
+</tr>
+<tr>
+<td align="left">T Stage &frac34;</td>
+<td align="left">1.24</td>
+<td align="left">1.07</td>
+<td align="left">1.43</td>
+<td align="left">0.0033</td>
+</tr>
+<tr>
+<td align="left">[0, 10) ng/ml</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">[10, 20) ng/ml</td>
+<td align="left">1.36</td>
+<td align="left">1.24</td>
+<td align="left">1.48</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">[20, Inf) ng/ml</td>
+<td align="left">1.50</td>
+<td align="left">1.36</td>
+<td align="left">1.66</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 7</td>
+<td align="left">Reference</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">GS 8</td>
+<td align="left">1.23</td>
+<td align="left">1.12</td>
+<td align="left">1.35</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 9</td>
+<td align="left">1.73</td>
+<td align="left">1.55</td>
+<td align="left">1.91</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr>
+<td align="left">GS 10</td>
+<td align="left">2.48</td>
+<td align="left">1.96</td>
+<td align="left">3.14</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+</tbody></table>
+
+<p>The results of a univariable regression model indicated that 
+Patients treated in Era 2 had statistically better survival than patients
+treated in Era 1, HR = 0.83 (95\% CI: 0.76,0.90), and there was no
+appreciable difference in the hazard ratio found in the multivariable
+regression model, HR = 0.84 (95\% CI: 0.77,0.92).  As expected, as
+patients increase in age, T Stage increase, PSA increase, and Gleason score
+increases, the hazard also increases.</p>
+
+<p>The hazard ratio between Gleason 8 and Gleason 7, from the multivariable Cox
+proportional hazard regression model, is 
+HR = 1.23 (95\% CI: 1.12,1.35).<br/>
+Further analysis of the pairwise comparisons of the hazards between all
+four Gleason scores can be provided upon request.</p>
+
+<h2>Conclusions</h2>
+
+<p>The conclusions section for a data analysis report would generally be used to
+summarize the results presented in the analysis and results section, list any
+limitations to the study, and generate some discussion topics.  Seeing how the
+purpose of <em>this</em> report was to show illustrate the use of knitr, the
+conclusions will focus on reproducible research.</p>
+
+<p>Using knitr to write data analysis reports were the written report and the
+data analysis methods is a version of literate programming.  When written well,
+the report are robust to changes in the data set, but more importantly, every
+element of the report is commented directly or contextually.  </p>
+
+<p>In addition to using knitr, a very powerful tool for authoring reports,
+both as a sole author, or as a collaboration, is to use version control
+software.  I prefer git, but another
+viable option is subversion.  RStudio has built-in features to working with
+either.  Repository hosting on github.com or bitbucket.org are helpful, but on
+public servers (private repos are possible, but think about the physical
+location of the data storage).  The git server software can be purchased and set
+up behind institutional firewalls.  </p>
+
+<pre><code class="r"># for reproducability, print out the session infor for the packages, and
+# versions of the packages, used to run the anlaysis and create this
+# document.
+print(sessionInfo(), local = FALSE)
+</code></pre>
+
+<pre><code>## R version 3.0.1 (2013-05-16)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## 
+## attached base packages:
+## [1] splines   stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+## [1] gdata_2.13.2    survival_2.37-4 knitr_1.5      
+## 
+## loaded via a namespace (and not attached):
+## [1] evaluate_0.5.1 formatR_0.10   gtools_3.1.1   stringr_0.6.2 
+## [5] tools_3.0.1
+</code></pre>
+
+</body>
+
+</html>
+

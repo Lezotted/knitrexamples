@@ -1,0 +1,113 @@
+# knitting SAS
+
+As long as SAS is not in your `PATH` variable, you need to specify its full path
+with the `engine.path` chunk option.
+
+Now, if you prefer to use SAS for data analysis, this shows it is 
+possible to write the analysis in SAS, and then run:
+
+```{r build-example, eval=FALSE, echo=TRUE}
+library(knitr)
+knit("knittingSAS.Rmd")
+```
+
+`knitr` is powerful enough to allow for multiple input languages in one file.
+Note that SAS was used in the first chunk, the following is the equivalent in R.
+
+*Thank you* to Matt Mulvahill for running this example in Linux, (remove the engine.path from the chunk options if running under linux).
+
+----------------------------------------------------
+
+## Example: Regression
+
+Here is an example of a simple regression in both SAS and R.  Yeah, that's right, *two* analysis languages, one markup language, *one* final output.  The data came from <a>http://www.ats.ucla.edu/stat/sas/modules/graph.htm</a>.
+
+```{r plot_in_sas, engine='sas', engine.path = "C:\\Program Files\\SASHome\\SASFoundation\\9.3\\sas.exe", eval=TRUE, echo=TRUE, results='asis'}
+DATA auto ;
+  INPUT make $  mpg rep78 weight foreign ;
+CARDS;
+AMC     22 3 2930 0
+AMC     17 3 3350 0
+AMC     22 . 2640 0
+Audi    17 5 2830 1
+Audi    23 3 2070 1
+BMW     25 4 2650 1
+Buick   20 3 3250 0
+Buick   15 4 4080 0
+Buick   18 3 3670 0
+Buick   26 . 2230 0
+Buick   20 3 3280 0
+Buick   16 3 3880 0
+Buick   19 3 3400 0
+Cad.    14 3 4330 0
+Cad.    14 2 3900 0
+Cad.    21 3 4290 0
+Chev.   29 3 2110 0
+Chev.   16 4 3690 0
+Chev.   22 3 3180 0
+Chev.   22 2 3220 0
+Chev.   24 2 2750 0
+Chev.   19 3 3430 0
+Datsun  23 4 2370 1
+Datsun  35 5 2020 1
+Datsun  24 4 2280 1
+Datsun  21 4 2750 1
+;
+RUN; 
+
+proc reg data = auto;
+model mpg = weight foreign;
+run;
+
+```
+
+
+### in R
+
+```{r, tidy = FALSE}
+dat <- 
+"AMC     22 3 2930 0
+AMC     17 3 3350 0
+AMC     22 . 2640 0
+Audi    17 5 2830 1
+Audi    23 3 2070 1
+BMW     25 4 2650 1
+Buick   20 3 3250 0
+Buick   15 4 4080 0
+Buick   18 3 3670 0
+Buick   26 . 2230 0
+Buick   20 3 3280 0
+Buick   16 3 3880 0
+Buick   19 3 3400 0
+Cad.    14 3 4330 0
+Cad.    14 2 3900 0
+Cad.    21 3 4290 0
+Chev.   29 3 2110 0
+Chev.   16 4 3690 0
+Chev.   22 3 3180 0
+Chev.   22 2 3220 0
+Chev.   24 2 2750 0
+Chev.   19 3 3430 0
+Datsun  23 4 2370 1
+Datsun  35 5 2020 1
+Datsun  24 4 2280 1
+Datsun  21 4 2750 1"
+
+auto <- read.table(col.names = c("make", "mpg", "rep78", "weight", "foreign"),
+                   text      = dat)
+auto$foreign <- factor(auto$foreign, 0:1, c("No", "Yes"))
+str(auto)
+
+fit <- lm(mpg ~ weight + foreign, data = auto)
+summary(fit)
+
+library(ggplot2)
+ggplot(auto) + aes(x = weight, y = mpg, color = foreign) + 
+  geom_point() + geom_smooth(method = "lm")
+
+```
+
+```{r}
+print(sessionInfo(), local = FALSE)
+```
+

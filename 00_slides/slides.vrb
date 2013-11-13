@@ -1,0 +1,12 @@
+\frametitle {Customizing the behavior of {\tt knitr}}
+  For Rnw files:
+
+  \begin{verbatim}<<"chunk_label", echo = FALSE, results = "asis">>=
+@
+  \end{verbatim}
+  \begin{itemize}
+    \item Chunk options must be a single line, no line breaks.
+    \item Options must be valid R expressions.
+    \item Chunk options can be specified for each individual chunk.
+    \item Global options are set via \verb;opts_chunk$set();
+  \end{itemize}
