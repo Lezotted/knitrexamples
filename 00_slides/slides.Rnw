@@ -8,6 +8,8 @@
 %
 % change log:
 %  9 Nov 2013 - file created
+% 17 Jan 2014 - fixed some spelling and grammar errors added an empty frame for 
+%               notes about git to be placed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % preamble %{{{
@@ -71,9 +73,9 @@ opts_chunk$set(fig.align = "center",
     \item Originally intended for software development
     \item Mix source code (for the computer) and documentation (for the humans)
       together
-    \item Sweave built on this paradigm to but with a different focus:
+    \item Sweave built on this paradigm but with a different focus:
       reproducible data analysis and statistical reports.
-    \item knitr, developed by Yihui Xie, expands on the concept of sweave.
+    \item knitr, developed by Yihui Xie, expands on the concept of Sweave.
     \item `designed to give the user access to every part of the process of
       dealing with a literate programming document'
     \item package homepage \url{http://yihui.name/knitr/}.
@@ -105,12 +107,12 @@ opts_chunk$set(fig.align = "center",
 \section{Hello World}
 %{{{
 \begin{frame}
-  \frametitle{Why knitr}
+  \frametitle{Why knitr?}
   \begin{itemize}
-    \item Incorporate both the analysis code and the manuscript writing into on
+    \item Incorporate both the analysis code and the manuscript writing into one
       file.
     \item Contextually commented analysis code.
-    \item Fully documented and reproducible.
+    \item Fully documented and reproducible reports.
   \end{itemize}
 \end{frame}
 
@@ -171,14 +173,17 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
 \begin{frame}[fragile]
   \frametitle{How does knitr work?}
   \begin{itemize}
-    \item One input file with an analysis language (R, Python, awk, SAS, \ldots)
-      and an output markup language (\LaTeX, html, Markdown, \ldots)
+    \item One input file with 
+      \begin{itemize}
+        \item an analysis language (R, Python, awk, SAS, \ldots) and 
+        \item an output markup language (\LaTeX, html, Markdown, \ldots)
+      \end{itemize}
 
     \item {\tt knitr} determines the appropriate set of patterns (regular
       expression to extract analysis language and options from the input file)
 
-    \item The input file is knitted\ldots, input language is evaluated and the
-      appropriate output markup results are placed into a .tex, .html, .md,
+    \item The input file is knitted\ldots, analysis language is evaluated and
+      the appropriate output markup results are placed into a .tex, .html, .md,
       \ldots, file.
 
     \item Final document (the .tex, .html, .md, \ldots)  is ready for release or
@@ -231,6 +236,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
   \begin{itemize}
     \item R is the `default' language for analysis 
     \item Other options are available, including SAS.  The chunk option `engine'
+      allows for different languages to be used.
 
       \begin{quote}
         engine: ('R'; character) the language name of the code chunk; currently
@@ -239,7 +245,8 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         languages\footnote{http://yihui.name/knitr/options}
       \end{quote}
 
-    \item Pick the right language for the job.  
+    \item Pick the right language for the job.  R is great, but every now and
+      then SAS would be preferable.  
   \end{itemize}
 \end{frame}
 
@@ -260,7 +267,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
       \end{itemize}
 
     \item html code can be placed natively in markdown, ergo, markdown has
-      supplants html.
+      supplanted html.
   \end{itemize}
 \end{frame}
 
@@ -272,7 +279,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
       \begin{itemize}
         \item Easy to learn 
         \item Simple and versatile
-        \item growing user community  
+        \item Growing user community  
         \item Via pandoc, easy to convert to many other file formats such as
           \LaTeX\, html, or .docx.
       \end{itemize}
@@ -360,6 +367,12 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
 \end{frame}
 %}}}
 
+\section{git}
+%{{{
+\begin{frame}[fragile]
+  \frametitle{Version Control with git}
+\end{frame}
+%}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
