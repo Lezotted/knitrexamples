@@ -10,7 +10,7 @@
 %
 % change log:
 % 11 Nov 2013 - File created
-%
+% 22 Jan 2014 - clean up the code for presentation at UCD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Preamble %{{{ 
@@ -280,22 +280,22 @@ rownames(out) <- rwnm
 # The following lapply statement fits a univariable coxph regression model for
 # each of the predictors used in the multiple regression model.  
 temp <- lapply(preds, 
-       function(x) { 
-         fit <- coxph(as.formula(paste("Surv(OS.Time, OS.Status) ~", x)),
-                      data = prostate)
-         rgrp  <- names(fit$xlevels)
-         nrgrp <- sapply(fit$xlevels, length)
-         rwnm  <- do.call(c, fit$xlevels)
-         out   <- matrix("", ncol = 4, nrow = sum(nrgrp))
-         rownames(out) <- paste0(rep(rgrp, times = nrgrp), rwnm)
-         out[rownames(out) %in% names(coef(fit)), 1]    <- frmt(exp(coef(fit)))
-         out[!(rownames(out) %in% names(coef(fit))), 1] <- "Reference"
-         out[rownames(out) %in% names(coef(fit)), 2:3] <- frmt(exp(confint(fit)))
-         out[rownames(out) %in% names(coef(fit)), 4]   <- 
-           frmtp(pnorm(-abs(coef(fit) / sqrt(diag(vcov(fit))))) * 2)
-         rownames(out) <- rwnm
-         return(out)
-       })
+               function(x) { 
+                 fit <- coxph(as.formula(paste("Surv(OS.Time, OS.Status) ~", x)),
+                              data = prostate)
+                 rgrp  <- names(fit$xlevels)
+                 nrgrp <- sapply(fit$xlevels, length)
+                 rwnm  <- do.call(c, fit$xlevels)
+                 out   <- matrix("", ncol = 4, nrow = sum(nrgrp))
+                 rownames(out) <- paste0(rep(rgrp, times = nrgrp), rwnm)
+                 out[rownames(out) %in% names(coef(fit)), 1]    <- frmt(exp(coef(fit)))
+                 out[!(rownames(out) %in% names(coef(fit))), 1] <- "Reference"
+                 out[rownames(out) %in% names(coef(fit)), 2:3] <- frmt(exp(confint(fit)))
+                 out[rownames(out) %in% names(coef(fit)), 4]   <- 
+                   frmtp(pnorm(-abs(coef(fit) / sqrt(diag(vcov(fit))))) * 2)
+                 rownames(out) <- rwnm
+                 return(out)
+               })
 temp <- do.call(rbind, temp)
 coxph.results <- cbind(temp, out)
 
@@ -384,8 +384,8 @@ write_bib(x = .packages(), file = "R-sources.bib")
 \appendix
 
 <<"session_info", echo = TRUE, results = "markup">>=
-# for reproducability, print out the session infor for the packages, and
-# versions of the packages, used to run the anlaysis and create this document.
+# for reproducibility, print out the session info for the packages, and
+# versions of the packages, used to run the analysis and create this document.
 print(sessionInfo(), local = FALSE)
 @
 % end backmatter %}}}
