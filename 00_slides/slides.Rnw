@@ -31,13 +31,17 @@
 \usefonttheme{serif}
 \setbeamercolor{framesubtitle}{fg=white}
 
-\title[Reproducible Research]{Reproducible Research using Literate Programming
-(R and {\tt knitr}) and version control (git)}
-\subtitle{A brief overview}
+\title[Reproducible Research]{Reproducible Research}
+
+% \\Using Literate Programming\\and\\version control}
+\subtitle{A brief overview of\\Literate Programming via R and {\tt
+knitr}\\and\\Version control via git}
 \author{Peter DeWitt}
 \institute{University of Colorado Anschutz Medical Campus 
  
 Department of Biostatistics}
+
+\date{29 January 2014}
 
 <<setup, include=FALSE, cache=FALSE>>=
 library(knitr)
