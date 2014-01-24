@@ -10,6 +10,7 @@
 %  9 Nov 2013 - file created
 % 17 Jan 2014 - fixed some spelling and grammar errors added an empty frame for 
 %               notes about git to be placed.
+% 23 Jan 2014 - editing this file to get it ready for presentation at UCD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % preamble %{{{
@@ -30,8 +31,8 @@
 \usefonttheme{serif}
 \setbeamercolor{framesubtitle}{fg=white}
 
-\title[knitr: Dynamic Reports in R]{{\tt knitr}: 
-Elegant, flexible, and fast dynamic report generation with R}
+\title[Reproducible Research]{Reproducible Research using Literate Programming
+(R and {\tt knitr}) and version control (git)}
 \subtitle{A brief overview}
 \author{Peter DeWitt}
 \institute{University of Colorado Anschutz Medical Campus 
