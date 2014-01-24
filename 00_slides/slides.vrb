@@ -1,1 +1,19 @@
 \frametitle {Version Control with git}
+  \begin{itemize}
+    \item Distributed version control: everything is local and can be synced
+      with a remote server.
+    \item Simple to use.
+      \begin{itemize}
+        \item Built in GUI with RStudio
+        \item Only need five commands to be able to use git.
+          \begin{enumerate}
+            \item git status
+            \item git log
+            \item git add
+            \item git pull
+            \item git push
+          \end{enumerate}
+        \item Other very helpful commands: tag, fetch, merge, mergetool, and
+          branch
+      \end{itemize}
+  \end{itemize}

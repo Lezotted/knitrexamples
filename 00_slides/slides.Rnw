@@ -63,7 +63,8 @@ opts_chunk$set(fig.align = "center",
   \titlepage
 \end{frame}
 
-\section[Outline]{} 
+% \section[Outline]*{} 
+\section*{} 
 \begin{frame}
   \frametitle{Presentation Outline}
   \tableofcontents
@@ -83,7 +84,7 @@ opts_chunk$set(fig.align = "center",
     \item knitr, developed by Yihui Xie, expands on the concept of Sweave.
     \item `designed to give the user access to every part of the process of
       dealing with a literate programming document'
-    \item package homepage \url{http://yihui.name/knitr/}.
+    \item package homepage \url{http://yihui.name/knitr/}
   \end{itemize}
 \end{frame}
 
@@ -210,7 +211,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
 @
   \end{verbatim}
   \begin{itemize}
-    \item Chunk options must be a single line, no line breaks.  
+    \item Chunk options must be a single line; no line breaks.  
     \item Options must be valid R expressions.
     \item Chunk options can be specified for each individual chunk.
     \item Global options are set via \verb;opts_chunk$set();
@@ -286,7 +287,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         \item Simple and versatile
         \item Growing user community  
         \item Via pandoc, easy to convert to many other file formats such as
-          \LaTeX\, html, or .docx.
+          \LaTeX, html, or .docx.
       \end{itemize}
     \item Cons: 
       \begin{itemize}
@@ -322,6 +323,36 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
       Easier to work in than html and more flexible.
 
   \end{itemize} 
+\end{frame}
+
+\subsection{Collaborations}
+\begin{frame}[fragile]
+  \frametitle{That's great, but \ldots}
+
+  \begin{itemize}
+    \item \LaTeX\ is my preferred markup language for data analysis reports and
+      presentations (via beamer).
+
+    \item Markdown is my preferred markup language for developing a web page.
+      Easier to work in than html and more flexible.
+
+    \item \LaTeX\ pdf are not always easy to transfer to MS Word
+    \item html pages are easy to break (more files outside of the required
+      directory structure) 
+    \item Misconceptions about viewing local files versus remote files in a web
+      browser.
+    \item .doc(x) are `accidentally' editable.  So much for reproducible
+      research.
+  \end{itemize}
+  \[
+  \text{.Rmd} \stackrel{\text{knitr}}{\rightarrow} 
+  \text{.md } \stackrel{\text{pandoc}}{\rightarrow} 
+  \begin{cases} 
+        \text{.html} & \text{okay} \\
+        \text{.doc(x)} & \text{might require VB scripting} \\
+        \text{.pdf}  & \text{Use \LaTeX} 
+      \end{cases}\]
+
 \end{frame}
 
 %}}}
@@ -376,6 +407,46 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
 %{{{
 \begin{frame}[fragile]
   \frametitle{Version Control with git}
+  \begin{itemize}
+    \item Distributed version control: everything is local and can be synced
+      with a remote server.
+    \item Simple to use.  
+      \begin{itemize}
+        \item Built in GUI with RStudio
+        \item Only need five commands to be able to use git.
+          \begin{enumerate}
+            \item git status
+            \item git log
+            \item git add
+            \item git pull
+            \item git push
+          \end{enumerate}
+        \item Other very helpful commands: tag, fetch, merge, mergetool, and
+          branch
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Do you need a server?}
+  \begin{itemize}
+    \item The repositories are local, so servers are not needed.
+    \item Servers to host a central repository are helpful for collaborations.
+    \item Read/Write permissions can be set for different users.
+    \item There are options to put a git enterprise on a server behind our
+      firewall, but it's expensive.
+    \item github.com has free public repos, pay for private repos
+    \item bitbucket.org has free public and private repos.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More on git}
+  \begin{itemize}
+    \item Visit \url{http://git-scm.com/book} for documentation on git.
+    \item Fully introducing git would take more time than is available right
+      now.
+  \end{itemize}
 \end{frame}
 %}}}
 
