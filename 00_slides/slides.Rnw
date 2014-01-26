@@ -11,6 +11,7 @@
 % 17 Jan 2014 - fixed some spelling and grammar errors added an empty frame for 
 %               notes about git to be placed.
 % 23 Jan 2014 - editing this file to get it ready for presentation at UCD
+% 25 Jan 2014 - added to xkcd comics for amusement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % preamble %{{{
@@ -69,6 +70,39 @@ opts_chunk$set(fig.align = "center",
   \frametitle{Presentation Outline}
   \tableofcontents
 \end{frame}
+
+\begin{frame}
+  \frametitle{A little humor}
+  \begin{minipage}[m]{0.48\textwidth}
+    \includegraphics[width=0.98\textwidth]{figure/file_extensions.png}
+    \begin{center} 
+       www.xkcd.com/1301
+    \end{center}
+  \end{minipage}
+  ~
+  \begin{minipage}[m]{0.48\textwidth}
+
+       Alt Text: I have never been lied to by data in a .txt file which has been hand-aligned.
+
+       The image itself is a .png
+  \end{minipage} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{A little humor}
+  \begin{minipage}[m]{0.48\textwidth}
+    \includegraphics[width=0.98\textwidth]{figure/automation.png}
+      \begin{center}
+        www.xkcd.com/1319
+      \end{center}
+  \end{minipage}
+  ~
+  \begin{minipage}[m]{0.48\textwidth}
+      
+      Alt Text: `Automating' comes from the roots `auto; meaning `self-', and
+      `mating', meaning `screwing'.
+  \end{minipage} 
+\end{frame}
 %}}}
 
 \section{Introduction}
@@ -102,7 +136,7 @@ opts_chunk$set(fig.align = "center",
       \begin{itemize}
         \item Not all analysis languages are ideally suited for this paradigm.
         \item Collaborations with others using WYSIWYG editors requires some
-          additional work and breaks automation. (Not a deal breaker)
+          additional work and breaks automation/reproducibility.
       \end{itemize}
     \item Additional Tools: Version control, e.g., git or svn.
   \end{itemize}
@@ -293,6 +327,8 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
       \begin{itemize}
         \item no native comments.  
         \item `too minimal'
+        \item pandoc may require additional scripting to format output as needed
+          for .docx or other file types.
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -307,6 +343,7 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         \item Comments.
         \item Many tools exist for formating R output well in \LaTeX\ files.
         \item Cross referencing, citations.
+        \item pdflatex produces a file that is almost platform independent.
       \end{itemize}
 
     \item Cons:
@@ -330,15 +367,8 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
   \frametitle{That's great, but \ldots}
 
   \begin{itemize}
-    \item \LaTeX\ is my preferred markup language for data analysis reports and
-      presentations (via beamer).
-
-    \item Markdown is my preferred markup language for developing a web page.
-      Easier to work in than html and more flexible.
-
     \item \LaTeX\ pdf are not always easy to transfer to MS Word
-    \item html pages are easy to break (more files outside of the required
-      directory structure) 
+    \item local html pages are easy to break 
     \item Misconceptions about viewing local files versus remote files in a web
       browser.
     \item .doc(x) are `accidentally' editable.  So much for reproducible
@@ -352,6 +382,9 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         \text{.doc(x)} & \text{might require VB scripting} \\
         \text{.pdf}  & \text{Use \LaTeX} 
       \end{cases}\]
+
+  \item Version control is easier with flat files.
+  \item \LaTeX has native commenting and markdown does not.
 
 \end{frame}
 

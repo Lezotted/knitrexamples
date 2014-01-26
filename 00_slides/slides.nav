@@ -3,70 +3,74 @@
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\sectionentry {2}{Introduction}{3}{Introduction}{0}}
-\headcommand {\beamer@sectionpages {2}{2}}
-\headcommand {\beamer@subsectionpages {2}{2}}
-\headcommand {\slideentry {2}{0}{3}{3/3}{}{0}}
+\headcommand {\slideentry {1}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
-\headcommand {\slideentry {2}{0}{4}{4/4}{}{0}}
+\headcommand {\slideentry {1}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\sectionentry {3}{Hello World}{5}{Hello World}{0}}
-\headcommand {\beamer@sectionpages {3}{4}}
-\headcommand {\beamer@subsectionpages {3}{4}}
-\headcommand {\slideentry {3}{0}{5}{5/5}{}{0}}
+\headcommand {\sectionentry {2}{Introduction}{5}{Introduction}{0}}
+\headcommand {\beamer@sectionpages {2}{4}}
+\headcommand {\beamer@subsectionpages {2}{4}}
+\headcommand {\slideentry {2}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\slideentry {3}{0}{6}{6/6}{}{0}}
+\headcommand {\slideentry {2}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
+\headcommand {\sectionentry {3}{Hello World}{7}{Hello World}{0}}
+\headcommand {\beamer@sectionpages {5}{6}}
+\headcommand {\beamer@subsectionpages {5}{6}}
 \headcommand {\slideentry {3}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\slideentry {3}{0}{8}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {4}{Design}{9}{Design}{0}}
-\headcommand {\beamer@sectionpages {5}{8}}
-\headcommand {\beamer@subsectionpages {5}{8}}
-\headcommand {\slideentry {4}{0}{9}{9/9}{}{0}}
+\headcommand {\slideentry {3}{0}{9}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\sectionentry {5}{Options}{10}{Options}{0}}
-\headcommand {\beamer@sectionpages {9}{9}}
-\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{5}{1}{10}{Chunk Options}}\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\slideentry {5}{1}{1}{10/10}{Chunk Options}{0}}
+\headcommand {\slideentry {3}{0}{10}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {5}{1}{2}{11/11}{Chunk Options}{0}}
+\headcommand {\sectionentry {4}{Design}{11}{Design}{0}}
+\headcommand {\beamer@sectionpages {7}{10}}
+\headcommand {\beamer@subsectionpages {7}{10}}
+\headcommand {\slideentry {4}{0}{11}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{5}{2}{12}{Language Options}}\headcommand {\beamer@subsectionpages {10}{11}}
-\headcommand {\slideentry {5}{2}{1}{12/12}{Language Options}{0}}
+\headcommand {\sectionentry {5}{Options}{12}{Options}{0}}
+\headcommand {\beamer@sectionpages {11}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{12}{Chunk Options}}\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\slideentry {5}{1}{1}{12/12}{Chunk Options}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {5}{2}{2}{13/13}{Language Options}{0}}
+\headcommand {\slideentry {5}{1}{2}{13/13}{Chunk Options}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {5}{2}{3}{14/14}{Language Options}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{14}{Language Options}}\headcommand {\beamer@subsectionpages {12}{13}}
+\headcommand {\slideentry {5}{2}{1}{14/14}{Language Options}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {5}{2}{4}{15/15}{Language Options}{0}}
+\headcommand {\slideentry {5}{2}{2}{15/15}{Language Options}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@subsectionentry {0}{5}{3}{16}{Collaborations}}\headcommand {\beamer@subsectionpages {12}{15}}
-\headcommand {\slideentry {5}{3}{1}{16/16}{Collaborations}{0}}
+\headcommand {\slideentry {5}{2}{3}{16/16}{Language Options}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\sectionentry {6}{Editors}{17}{Editors}{0}}
-\headcommand {\beamer@sectionpages {10}{16}}
-\headcommand {\beamer@subsectionpages {16}{16}}
-\headcommand {\slideentry {6}{0}{2}{17/17}{}{0}}
+\headcommand {\slideentry {5}{2}{4}{17/17}{Language Options}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\sectionentry {7}{Examples}{18}{Examples}{0}}
-\headcommand {\beamer@sectionpages {17}{17}}
-\headcommand {\beamer@subsectionpages {17}{17}}
-\headcommand {\slideentry {7}{0}{3}{18/18}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{18}{Collaborations}}\headcommand {\beamer@subsectionpages {14}{17}}
+\headcommand {\slideentry {5}{3}{1}{18/18}{Collaborations}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\sectionentry {8}{git}{19}{git}{0}}
-\headcommand {\beamer@sectionpages {18}{18}}
+\headcommand {\sectionentry {6}{Editors}{19}{Editors}{0}}
+\headcommand {\beamer@sectionpages {12}{18}}
 \headcommand {\beamer@subsectionpages {18}{18}}
-\headcommand {\slideentry {8}{0}{4}{19/19}{}{0}}
+\headcommand {\slideentry {6}{0}{2}{19/19}{}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {8}{0}{5}{20/20}{}{0}}
+\headcommand {\sectionentry {7}{Examples}{20}{Examples}{0}}
+\headcommand {\beamer@sectionpages {19}{19}}
+\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\slideentry {7}{0}{3}{20/20}{}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {8}{0}{6}{21/21}{}{0}}
+\headcommand {\sectionentry {8}{git}{21}{git}{0}}
+\headcommand {\beamer@sectionpages {20}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\slideentry {8}{0}{4}{21/21}{}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\beamer@partpages {1}{21}}
-\headcommand {\beamer@subsectionpages {19}{21}}
-\headcommand {\beamer@sectionpages {19}{21}}
-\headcommand {\beamer@documentpages {21}}
-\headcommand {\def \inserttotalframenumber {21}}
+\headcommand {\slideentry {8}{0}{5}{22/22}{}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {8}{0}{6}{23/23}{}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@partpages {1}{23}}
+\headcommand {\beamer@subsectionpages {21}{23}}
+\headcommand {\beamer@sectionpages {21}{23}}
+\headcommand {\beamer@documentpages {23}}
+\headcommand {\def \inserttotalframenumber {23}}
