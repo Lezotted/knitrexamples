@@ -10,7 +10,7 @@
 %
 % change log:
 % 11 Nov 2013 - File created
-%
+% 22 Jan 2014 - clean up the code for presentation at UCD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Preamble %{{{ 
@@ -293,8 +293,8 @@ up behind institutional firewalls.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# for reproducability, print out the session infor for the packages, and}
-\hlcom{# versions of the packages, used to run the anlaysis and create this}
+\hlcom{# for reproducibility, print out the session info for the packages, and}
+\hlcom{# versions of the packages, used to run the analysis and create this}
 \hlcom{# document.}
 \hlkwd{print}\hlstd{(}\hlkwd{sessionInfo}\hlstd{(),} \hlkwc{local} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 \end{alltt}
@@ -303,17 +303,17 @@ up behind institutional firewalls.
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## 
 ## attached base packages:
-## [1] splines   stats     graphics  grDevices utils     datasets  methods  
-## [8] base     
+## [1] grid      splines   stats     graphics  grDevices utils     datasets 
+## [8] methods   base     
 ## 
 ## other attached packages:
-## [1] gdata_2.13.2    Hmisc_3.12-2    Formula_1.1-1   survival_2.37-4
-## [5] knitr_1.4.1     vimcom_0.9-9    setwidth_1.0-3  colorout_1.0-0 
+##  [1] gdata_2.13.2    Hmisc_3.13-0    Formula_1.1-1   lattice_0.20-24
+##  [5] cluster_1.14.4  survival_2.37-7 knitr_1.5       vimcom_0.9-91  
+##  [9] setwidth_1.0-3  colorout_1.0-0 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] cluster_1.14.4  digest_0.6.3    evaluate_0.4.7  formatR_0.9    
-##  [5] grid_3.0.2      gtools_3.1.0    highr_0.2.1     lattice_0.20-24
-##  [9] rpart_4.1-3     stringr_0.6.2   tools_3.0.2
+## [1] evaluate_0.5.1 formatR_0.10   gtools_3.1.1   highr_0.3     
+## [5] stringr_0.6.2  tools_3.0.2
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
