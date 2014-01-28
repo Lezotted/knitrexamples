@@ -139,6 +139,8 @@ opts_chunk$set(fig.align = "center",
           additional work and breaks automation/reproducibility.
       \end{itemize}
     \item Additional Tools: Version control, e.g., git or svn.
+    \item[]
+    \item Every project is different, use the tools that will work best.
   \end{itemize}
 \end{frame}
 
@@ -367,8 +369,8 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
   \frametitle{That's great, but \ldots}
 
   \begin{itemize}
-    \item \LaTeX\ pdf are not always easy to transfer to MS Word
-    \item local html pages are easy to break 
+    \item \LaTeX\ pdfs are not always easy to transfer to MS Word
+    \item Local html pages are easy to break.
     \item Misconceptions about viewing local files versus remote files in a web
       browser.
     \item .doc(x) are `accidentally' editable.  So much for reproducible
@@ -383,8 +385,11 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         \text{.pdf}  & \text{Use \LaTeX} 
       \end{cases}\]
 
-  \item Version control is easier with flat files.
-  \item \LaTeX has native commenting and markdown does not.
+  \begin{itemize}
+    \item What about Google docs?
+    \item What about track changes in Office?
+  \end{itemize}
+
 
 \end{frame}
 
