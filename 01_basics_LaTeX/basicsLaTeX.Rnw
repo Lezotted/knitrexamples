@@ -85,15 +85,15 @@ reproducing this report.
   \item Install R and \LaTeX\ on your computer.
 
   \item Open R, install the knitr package if the package is not on your system.
-% This chunk is for example purposes only, not be evaluated
 <<"knitr_install", eval = FALSE, echo = TRUE>>=
+# This chunk is for example purposes only, not be evaluated
 install.packages("knitr", repos = "http://cran.rstudio.com")
 @
 
   \item Set the working directory in R to the same directory as this file exists
     in.  Run the following commands in R, 
-% This chunk is for example purposes only, not be evaluated
 <<"knit_report", eval = FALSE, echo = TRUE>>=
+# This chunk is for example purposes only, not be evaluated
 library(knitr)
 knit(input = "basicsLaTeX.Rnw")
 @
