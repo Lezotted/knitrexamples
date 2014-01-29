@@ -116,16 +116,19 @@ Department of Biostatistics}
 
 \begin{frame}
   \frametitle{A little humor}
-  \begin{minipage}[m]{0.48\textwidth}
+  \begin{minipage}[m]{0.58\textwidth}
     \includegraphics[width=0.98\textwidth]{figure/file_extensions.png}
+  \end{minipage}
+  ~
+  \begin{minipage}[m]{0.38\textwidth}
     \begin{center} 
        www.xkcd.com/1301
     \end{center}
-  \end{minipage}
-  ~
-  \begin{minipage}[m]{0.48\textwidth}
 
-       Alt Text: I have never been lied to by data in a .txt file which has been hand-aligned.
+       Alt Text: I have never been lied to by data in a .txt file which has been
+       hand-aligned.
+
+       \vspace{0.5in}
 
        The image itself is a .png
   \end{minipage} 
@@ -133,15 +136,16 @@ Department of Biostatistics}
 
 \begin{frame}
   \frametitle{A little humor}
-  \begin{minipage}[m]{0.48\textwidth}
+  \begin{minipage}[m]{0.58\textwidth}
     \includegraphics[width=0.98\textwidth]{figure/automation.png}
+  \end{minipage}
+  ~
+  \begin{minipage}[m]{0.38\textwidth}
+      
       \begin{center}
         www.xkcd.com/1319
       \end{center}
-  \end{minipage}
-  ~
-  \begin{minipage}[m]{0.48\textwidth}
-      
+
       Alt Text: `Automating' comes from the roots `auto; meaning `self-', and
       `mating', meaning `screwing'.
   \end{minipage} 
@@ -158,7 +162,7 @@ Department of Biostatistics}
       together
     \item Sweave built on this paradigm but with a different focus:
       reproducible data analysis and statistical reports.
-    \item knitr, developed by Yihui Xie, expands on the concept of Sweave.
+    \item {\tt knitr}, developed by Yihui Xie, expands on the concept of Sweave.
     \item `designed to give the user access to every part of the process of
       dealing with a literate programming document'
     \item package homepage \url{http://yihui.name/knitr/}
@@ -172,7 +176,7 @@ Department of Biostatistics}
       \begin{itemize}
         \item Reproducible reports 
         \item Contextual commenting 
-        \item knitr is flexible enough to allow for multiple analysis languages,
+        \item {\tt knitr} is flexible enough to allow for multiple analysis languages
           and multiple markup languages.
       \end{itemize}
     \item Cons:
@@ -183,7 +187,7 @@ Department of Biostatistics}
       \end{itemize}
     \item Additional Tools: Version control, e.g., git or svn.
     \item[]
-    \item Every project is different, use the tools that will work best.
+    \item Every project is different; use the tools that will work best.
   \end{itemize}
 \end{frame}
 
@@ -192,7 +196,7 @@ Department of Biostatistics}
 \section{Hello World}
 %{{{
 \begin{frame}
-  \frametitle{Why knitr?}
+  \frametitle{Why {\tt knitr}?}
   \begin{itemize}
     \item Incorporate both the analysis code and the manuscript writing into one
       file.
@@ -218,7 +222,7 @@ latex(cbind(coef(fit), confint(fit)),
 
 {\tt 
 The expected stopping distance for a car during the 1920s 
-increased by a $\backslash$Sexpr\{round(coef(fit)[2], 2)\} 
+increased by $\backslash$Sexpr\{round(coef(fit)[2], 2)\} 
 feet for every additional mph increase in speed.} 
 
 \verb;\end{frame};
@@ -249,7 +253,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
 }
 
 
-  The expected stopping distance for a car during the 1920s increased by a
+  The expected stopping distance for a car during the 1920s increased by
   3.93 feet for every additional mph increase in
   speed.
 \end{frame}
@@ -278,7 +282,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
 \section{Design}
 %{{{
 \begin{frame}[fragile]
-  \frametitle{How does knitr work?}
+  \frametitle{How does {\tt knitr} work?}
   \begin{itemize}
     \item One input file with 
       \begin{itemize}
@@ -325,7 +329,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
   \url{http://yihui.name/knitr/options}
   \begin{itemize}
     \item Code Evaluation
-    \item Text Results
+    \item How to display results
     \item Code Decoration
     \item Cache
     \item Plots
@@ -365,7 +369,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
       \begin{itemize}
         \item easy to send to others, 
         \item comments in html, 
-        \item great for tutorials or anything that will be published on line.
+        \item great for tutorials or anything that will be published online.
       \end{itemize}
     \item Cons: 
       \begin{itemize}
@@ -415,8 +419,9 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
 
     \item Cons:
       \begin{itemize}
-        \item Not so good when working with others using Microsoft Office.
-        \item R is small,  Tex Live, MacTeX, and proTeXt are not.
+        \item Difficulties will be encountered  when collaborating with
+          Microsoft Office users.
+        \item R is small,  Tex Live, MacTeX, and proTeX are not.
         \item Steepest learning curve
       \end{itemize}
   \end{itemize} 
@@ -454,8 +459,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
     \item Local html pages are easy to break.
     \item Misconceptions about viewing local files versus remote files in a web
       browser.
-    \item .doc(x) are `accidentally' editable.  So much for reproducible
-      research.
+    \item .doc(x) are `accidentally' editable.  %So much for reproducible research.
   \end{itemize}
 
   \begin{itemize}
@@ -493,7 +497,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
     \item Vim is a better text editor.
 
     \item A pseudo WYSIWYG editor for \LaTeX\ which will work well with 
-      {\tt kntir} is LyX.
+      {\tt knitr} is LyX.
       
   \end{itemize}
 \end{frame}
@@ -509,7 +513,7 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
   \begin{itemize}
     \item A simple data analysis report using R, and three different markup
       languages, \LaTeX, html, and Markdown.
-    \item An example of using SAS within knitr.
+    \item An example of using SAS within {\tt knitr}.
     \item An example of a more complex and extensive data analysis report.
   \end{itemize}
 \end{frame}
@@ -549,17 +553,18 @@ speed&$  3.93$&$  3.1$&$ 4.77$\LL
       firewall, but it's expensive.
     \item github.com has free public repos, pay for private repos
     \item bitbucket.org has free public and private repos.
+    \item[]
+    \item Visit \url{http://git-scm.com/book} for documentation on git.
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{More on git}
-  \begin{itemize}
-    \item Visit \url{http://git-scm.com/book} for documentation on git.
-    \item Fully introducing git would take more time than is available right
-      now.
-  \end{itemize}
-\end{frame}
+% \begin{frame}
+%   \frametitle{More on git}
+%   \begin{itemize}
+%     \item Fully introducing git would take more time than is available right
+%       now.
+%   \end{itemize}
+% \end{frame}
 %}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
