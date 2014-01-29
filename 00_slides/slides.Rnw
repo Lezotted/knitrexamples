@@ -354,7 +354,13 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
         \item R is small,  Tex Live, MacTeX, and proTeXt are not.
         \item Steepest learning curve
       \end{itemize}
+  \end{itemize} 
+\end{frame}
 
+\begin{frame}
+  \frametitle{Markup Language}
+  \framesubtitle{My Preferences}
+  \begin{itemize}
     \item \LaTeX\ is my preferred markup language for data analysis reports and
       presentations (via beamer).
 
@@ -362,6 +368,16 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
       Easier to work in than html and more flexible.
 
   \end{itemize} 
+
+  \[ 
+  \text{.Rmd} \stackrel{\text{knitr}}{\rightarrow} 
+  \text{.md } \stackrel{\text{pandoc}}{\rightarrow} 
+  \begin{cases} 
+        \text{.html} & \text{okay} \\
+        \text{.doc(x)} & \text{might require VB scripting} \\
+        \text{.pdf}  & \text{Use \LaTeX} 
+      \end{cases}\]
+
 \end{frame}
 
 \subsection{Collaborations}
@@ -376,20 +392,11 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
     \item .doc(x) are `accidentally' editable.  So much for reproducible
       research.
   \end{itemize}
-  \[
-  \text{.Rmd} \stackrel{\text{knitr}}{\rightarrow} 
-  \text{.md } \stackrel{\text{pandoc}}{\rightarrow} 
-  \begin{cases} 
-        \text{.html} & \text{okay} \\
-        \text{.doc(x)} & \text{might require VB scripting} \\
-        \text{.pdf}  & \text{Use \LaTeX} 
-      \end{cases}\]
 
   \begin{itemize}
     \item What about Google docs?
     \item What about track changes in Office?
   \end{itemize}
-
 
 \end{frame}
 
@@ -401,22 +408,24 @@ qplot(speed, dist, data = cars) + geom_smooth(method = "lm")
   \frametitle{Suggested Development Environments}
 
   \begin{itemize}
-    \item For nearly all current, and new,  R programmers, 
-      RStudio is the \emph{premier} R IDE.
+    \item I prefer the Vim editor and with the vim-r-plugin.  
+      \begin{itemize}
+        \item Vim Editor: \url{www.vim.org/index.php}
+        \item vim-r-plugin: \url{www.vim.org/scripts/script.php?script\_id=2628} 
+        \item Completely customizable.
+      \end{itemize}
+
+    \item If you are not a Vim or Emacs user, then RStudio is the \emph{premier}
+      R IDE for you.
       \begin{itemize}
         \item Download and info: \url{www.rstudio.com}
 
         \item Built in tools for version control, projects, knitting\ldots
       \end{itemize}
 
-    \item I prefer the vim editor and with the vim-r-plugin.  
-      \begin{itemize}
-        \item Vim Editor: \url{www.vim.org/index.php}
-        \item vim-r-plugin: \url{www.vim.org/scripts/script.php?script\_id=2628} 
-      \end{itemize}
 
-    \item RStudio is the better R development environment.  Vim is a better text
-      editor.
+    \item RStudio is the better R development environment.  
+    \item Vim is a better text editor.
 
     \item A pseudo WYSIWYG editor for \LaTeX\ which will work well with 
       {\tt kntir} is LyX.
